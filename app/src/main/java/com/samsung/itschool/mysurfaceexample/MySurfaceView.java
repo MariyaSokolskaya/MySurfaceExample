@@ -25,6 +25,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     float hi, wi;//ширина и высота изображения
     float hs, ws;//ширина и высота области рисования
     boolean isFirstDraw = true;
+    GameMap gameMap;
 
     Rect wallRect, imageRect;
 
@@ -77,18 +78,23 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             wallY = random.nextInt((int)(hs - wall.getHeight() - 5));
             wallRect = new Rect((int)wallX, (int)wallY, (int)(wallX + wall.getWidth()),
                     (int)(wallY + wall.getHeight()));
+            gameMap = new GameMap((int)ws, (int)hs, res);
+            iX = ws / 2;
+            iY = 4 * hs / 5 ;
             isFirstDraw = false;
         }
+        gameMap.draw(canvas);
         canvas.drawBitmap(image, iX, iY, paint);
-        canvas.drawBitmap(wall, wallX, wallY, paint);
+        //canvas.drawBitmap(wall, wallX, wallY, paint);
         //canvas.drawLine(iX, iY, tX, tY, paint);
         //if(tX != 0)
             //delta();
-        imageRect = new Rect((int)iX, (int)iY, (int) (iX + wi), (int)(iY + hi));
-        if(imageRect.intersect(wallRect)){
-            dy = 0;
-            dx = 0;
-        }
+//        imageRect = new Rect((int)iX, (int)iY, (int) (iX + wi), (int)(iY + hi));
+//
+//        if(imageRect.intersect(wallRect)){
+//            dy = 0;
+//            dx = 0;
+//        }
 
         iX += dx;
         iY += dy;
